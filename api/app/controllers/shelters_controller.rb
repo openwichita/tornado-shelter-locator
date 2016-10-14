@@ -1,19 +1,51 @@
 class SheltersController < ApplicationController
   before_action :set_shelter, only: [:show, :update, :destroy]
 
+  # apipie resource description
+  resource_description do
+    short 'Tornado Shelters'
+    meta :author => {:name => 'Austin Crane' }
+    formats ['json']
+    description <<-EOS
+      == Shelter (Tornado Shelter)
+      === Properties
+      - lat: decimal
+      - lng: decimal
+      - address: string
+      - city: string
+      - description: string
+    EOS
+  end
+
+  # reusable param group for shelters json in requests
+  def_param_group :shelter do
+    param :lat, Integer
+    param :lng, Integer
+    param :address, String
+    param :city, String
+    param :description, String
+  end
+
   # GET /shelters
+  api :GET, '/shelters'
+  description 'get all shelters'
   def index
     @shelters = Shelter.all
 
     render json: @shelters
   end
 
-  # GET /shelters/1
+  # GET /shelters/:id
+  api :GET, '/shelters/:id'
+  param :id, String, 'unique id for a shelter'
   def show
     render json: @shelter
   end
 
   # POST /shelters
+  api :POST, '/shelters'
+  param_group :shelter
+  description 'create a shelter'
   def create
     @shelter = Shelter.new(shelter_params)
 
@@ -24,7 +56,10 @@ class SheltersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /shelters/1
+  # PUT /shelters/:id
+  api :PUT, '/shelters/:id'
+  param_group :shelter
+  description 'update a shelter'
   def update
     if @shelter.update(shelter_params)
       render json: @shelter
@@ -33,7 +68,10 @@ class SheltersController < ApplicationController
     end
   end
 
-  # DELETE /shelters/1
+  # DELETE /shelters/:id
+  api :DELETE, '/shelters/:id'
+  param :id, String
+  description 'delete a shelter'
   def destroy
     @shelter.destroy
   end
