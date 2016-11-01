@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
+    <meta charset="utf-8" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="assets/master.css" rel="stylesheet" />
   </head>
@@ -8,13 +10,35 @@
       <div id="banner" class="row">
         <h3 class="text-center">Tornado Shelters</h3>
       </div>
-      <div id="map" class="row">
+      <div id="loading" class="text-center">
+        <i class="fa fa-cog fa-spin fa-5x"></i>
+      </div>
+      <div id="map" class="row" hidden>
+      </div>
+      <!-- in three columns -->
+      <div class="row" data-bind="foreach: shelterGroups">
+        <div id="shelter-list" class="col-md-4" data-bind="foreach: $data">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span data-bind="text: city"></span>
+              <span data-bind="text: description"></span>
+            </div>
+            <div class="panel-body">
+              <p data-bind="text: address"></p>
+              <p data-bind="visible: instructions, text: instructions"></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <script src="http://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--<script src="http://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+    <script src="http://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script type="text/javascript" src="assets/test-data.js"></script>
     <script type="text/javascript" src="assets/api.js"></script>
     <script type="text/javascript" src="assets/master.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>-->
   </body>
 </html>
