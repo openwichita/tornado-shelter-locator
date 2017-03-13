@@ -14,6 +14,7 @@ class SheltersController < ApplicationController
       - address: string
       - city: string
       - description: string
+      - instructions: string
     EOS
   end
 
@@ -24,6 +25,7 @@ class SheltersController < ApplicationController
     param :address, String
     param :city, String
     param :description, String
+    param :instructions, String
   end
 
   # GET /shelters
